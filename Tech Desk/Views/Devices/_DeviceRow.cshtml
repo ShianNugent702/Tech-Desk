@@ -1,0 +1,14 @@
+﻿@model Tech_Desk.Models.Device
+
+<tr>
+    <td>@Model.AssetTag</td>
+    <td>@Model.Name</td>
+    <td>@Model.Category</td>
+    <td>@Model.PurchaseYear</td>
+    <td>@(Model.IsOnLoan ? "On loan" : "Available")</td>
+    <td>
+        <a asp-action="Details" asp-route-id="@Model.Id">Details</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+    </td>
+</tr>

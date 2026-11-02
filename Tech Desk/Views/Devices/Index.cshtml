@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Tech_Desk.Models.Device>
+
+@{
+    ViewData["Title"] = "Devices";
+}
+
+<h1>Devices</h1>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<p>@ViewBag.DeviceCount devices</p>
+<p>
+    <a asp-action="Add" class="btn btn-success">Add a device</a>
+</p>
+<form asp-action="Index" method="get" class="mb-4 mt-3">
+    <div class="row g-2 align-items-center">
+        <div class="col-auto">
+            <input type="text" name="searchString" value="@ViewBag.SearchString" 
+                   placeholder="Part of the name" class="form-control" />
+        </div>
+        <div class="col-auto form-check ms-3">
+            <input class="form-check-input" type="checkbox" name="availableOnly" 
+                   value="true" id="availableOnly" @(ViewBag.AvailableOnly == true ? "checked" : "") />
+            <label class="form-check-label" for="availableOnly">Available only</label>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Asset tag</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Year bought</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var device in Model)
+        {
+            <partial name="_DeviceRow" model="device" />
+        }
+    </tbody>
+</table>
